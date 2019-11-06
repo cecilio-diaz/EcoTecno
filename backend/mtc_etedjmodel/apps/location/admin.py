@@ -7,18 +7,19 @@ admin.site.site_header = 'SMART POWER CHARGE'
 
 class Adminservice(admin.ModelAdmin):
 
-    list_display = ('date_create',
+    list_display = ('seller',
+                   'date_create',
                     'date_update',
                     'country',
                     'city',
                     'dataSource',
-                    'latitude',
-                    'longitude',
                     'status',
                     'IoTdevice',
+                    'SensorType',
                     'value',
                     'unit',
                     )
+
 
     search_fields = (
             'country',

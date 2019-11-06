@@ -6,24 +6,24 @@ from .models        import profile
 # Register your models here.
 
 
-admin.site.site_header = 'BlaBlaFarm'
-
-class Adminprofile(admin.ModelAdmin):
+class AdminProfile(admin.ModelAdmin):
 
     list_display = ('date_update',
-                    'name',
+                    'profile',
                     'description',
                     'latitude',
                     'longitude',
                     'image',
                     'verified',
-                    'rating')
+                    'rating',
+                    )
 
-    search_fields = ('name',
+    search_fields = ('profile',
                      'rating',
                      )
 
     list_filter = (
-            'name',
+            'profile',
             'rating',
             )
+admin.site.register(profile,AdminProfile)

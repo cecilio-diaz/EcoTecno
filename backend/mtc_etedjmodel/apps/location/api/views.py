@@ -9,4 +9,4 @@ class localization_Set(viewsets.ModelViewSet):
     queryset         = service.objects.all().order_by('-id')
     serializer_class = localization_Serializers
     filter_backends  = [DjangoFilterBackend,]
-    filter_fields    = ['date_create','country','city','status','placesAvailable',]
+    filter_fields    = ['date_create','country','city','status','placesAvailable','seller']
