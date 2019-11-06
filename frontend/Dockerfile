@@ -1,10 +1,16 @@
-FROM node:lts-alpine
-RUN npm install -g http-server
+FROM node:lts-alpine as builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm install --production
-COPY . .
+COPY ./package*.json ./
+RUN npm install
+COPY ./ ./
 RUN npm run build
 
-EXPOSE 8080
-CMD [ "http-server", "dist" ]
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY ./nginx/conf.d/default.template /etc/nginx/conf.d/default.template
+ARG SERVICE_PORT
+EXPOSE ${SERVICE_PORT}
+ENV ESC='$'
+CMD ["./entrypoint.sh"]
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
