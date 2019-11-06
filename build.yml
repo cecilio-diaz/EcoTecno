@@ -45,5 +45,17 @@ services:
         EJECUTAR: 'python3 manage.py runserver 0.0.0.0:8000'
 
 
-    # EJECUTAR:
-  #  command: python manage.py runserver 0.0.0.0:8000
+  senddata:
+    build:
+       context: simulate_data
+       dockerfile: Dockerfile
+    container_name: senddata
+    image: cecilio91/ecotecno:v1senddata
+    ports:
+      - '3010:3010'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    environment:
+        EJECUTAR: python senddata.py 'http://90.147.184.214'

@@ -23,7 +23,6 @@ services:
       - "6379:6379"
     entrypoint: redis-server --appendonly yes
 
-
   django_migrate:
     image: cecilio91/ecotecno:v1django
     container_name: djangobackup
@@ -39,6 +38,19 @@ services:
 
 
   django:
+    image: cecilio91/ecotecno:v1django
+    container_name: djangobackup
+    ports:
+      - '38400:8000'
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    environment:
+        EJECUTAR: 'python3 manage.py runserver 0.0.0.0:8000'
+
+  celery_task:
     image: cecilio91/ecotecno:v1django
     container_name: djangobackup
     ports:

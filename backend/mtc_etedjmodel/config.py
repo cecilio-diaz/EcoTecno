@@ -5,19 +5,16 @@
 
 #    LIBRARY
 import os
-from datetime import datetime
+from   datetime import datetime
 import socket
 import sys
-from os import listdir
-
-
+from   os import listdir
 import argparse
 # // LIBRARY
 
-def config(IP,PUERTO,USER,PASSWORD,DB):
-
-    SECRET_KEY = """ '0k^k))ac-zp$6)6f+bljru0e-!fx175hanut(93_5l*t2(@3@1' """
-    DB_URL     = ' "postgres://'+str(USER)+':'+PASSWORD+'@'+str(IP)+':'+str(PUERTO)+'/'+str(DB) +'"'
+def config(POSTGRES_KEY,POSTGRES_IP,POSTGRES_PORT,POSTGRES_USER,POSTGRES_PASSWORD,POSTGRES_DB):
+    SECRET_KEY = """ '""" +str(POSTGRES_KEY) + """' """
+    DB_URL     = ' "postgres://'+str(POSTGRES_USER)+':'+POSTGRES_PASSWORD+'@'+str(POSTGRES_IP)+':'+str(POSTGRES_PORT)+'/'+str(POSTGRES_DB) +'"'
 
     print('--------------*---------------*--------------*')
     print(DB_URL)
@@ -39,14 +36,14 @@ def config(IP,PUERTO,USER,PASSWORD,DB):
     except:
         print('Ruta del contenedor no disponible para config')
 
-IP       = sys.argv[1]
-PUERTO   = sys.argv[2]
-USER     = sys.argv[3]
-PASSWORD = sys.argv[4]
-DB       = sys.argv[5]
+POSTGRES_DB       = sys.argv[1]
+POSTGRES_PASSWORD = sys.argv[2]
+POSTGRES_USER     = sys.argv[3]
+POSTGRES_PORT     = sys.argv[4]
+POSTGRES_IP       = sys.argv[5]
+POSTGRES_KEY      = sys.argv[6]
 
-print(IP,PUERTO,USER,PASSWORD,DB)
-config(IP,PUERTO,USER,PASSWORD,DB)
+(POSTGRES_KEY,POSTGRES_IP,POSTGRES_PORT,POSTGRES_USER,POSTGRES_PASSWORD,POSTGRES_DB)
 
 print('------------------------------------------------')
 print('------------------------------------------------')

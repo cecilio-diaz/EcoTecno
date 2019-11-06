@@ -9,13 +9,13 @@ class localization_Serializers(serializers.ModelSerializer):
         model  = service
         fields = (
                 'id',
+                'seller',
                 'date_create',
                 'country',
                 'city',
                 'dataSource',
-                'latitude',
-                'longitude',
                 'status',
-                'placesAvailable',
-                'placesOccupied',
-                'radius')
+                'IoTdevice',
+                'SensorType',
+                'value',
+                'unit')

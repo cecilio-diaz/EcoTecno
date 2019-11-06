@@ -8,5 +8,5 @@ COPY . .
 RUN pip install -r requirements.txt
 
 # MIGRACIONES
-RUN python manage.py  makemigrations --noinput; exit 0
-RUN python manage.py  migrate --noinput; exit 0
+#RUN python manage.py  makemigrations --noinput; exit 0
+#RUN python manage.py  migrate --noinput; exit 0
