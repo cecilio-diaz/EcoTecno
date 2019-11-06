@@ -8,8 +8,8 @@ from .views                            import insert_buffer_data
 from django.urls                       import include, path
 from rest_framework                    import routers
 
-from apps.location.api.views       import  localization_Set
-
+from apps.location.api.views           import  localization_Set
+from apps.consumer.api.views            import  profile_Set
 
 from rest_framework.urlpatterns import format_suffix_patterns
 
@@ -20,6 +20,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 router = routers.DefaultRouter()
 
 router.register('api/v1/services',localization_Set)
+router.register('api/v1/profile', profile_Set)
 #router.register('api/v1/maquina_mtc'        ,MaquinaSet)
 
 urlpatterns = [

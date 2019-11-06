@@ -45,5 +45,14 @@ services:
         EJECUTAR: 'python3 manage.py runserver 0.0.0.0:8000'
 
 
+  flower:
+    image: mher/flower
+    environment:
+      - CELERY_BROKER_URL=redis://10.0.75.1:6379
+      - FLOWER_PORT=8888
+    ports:
+      - 8888:8888
+    restart: always
+
     # EJECUTAR:
   #  command: python manage.py runserver 0.0.0.0:8000

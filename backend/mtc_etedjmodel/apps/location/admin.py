@@ -15,15 +15,17 @@ class Adminservice(admin.ModelAdmin):
                     'latitude',
                     'longitude',
                     'status',
-                    'placesAvailable',
-                    'placesOccupied',
-                    'radius',
+                    'IoTdevice',
+                    'value',
+                    'unit',
                     )
+
     search_fields = (
             'country',
             'city',
             'dataSource',
             'status',
+            'IoTdevice',
              )
 
     list_filter = (
@@ -31,5 +33,6 @@ class Adminservice(admin.ModelAdmin):
             'city',
             'dataSource',
             'status',
+            'IoTdevice',
             )
 admin.site.register(service,Adminservice)

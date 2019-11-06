@@ -16,6 +16,6 @@ class localization_Serializers(serializers.ModelSerializer):
                 'latitude',
                 'longitude',
                 'status',
-                'placesAvailable',
-                'placesOccupied',
-                'radius')
+                'IoTdevice',
+                'value',
+                'unit')

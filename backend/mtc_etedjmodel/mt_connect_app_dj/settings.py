@@ -16,7 +16,7 @@ MEDIA_URL = "/media/"
 SECRET_KEY = '0k^k))ac-zp$6)6f+bljru0e-!fx175hanut(93_5l*t2(@3@1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True       
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'scripts',
     'apps.location',
+    'apps.consumer',
+    'apps.seller',
 ]
 
 MIDDLEWARE = [
