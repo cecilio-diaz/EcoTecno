@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: posqgresql-db3
+  labels:
+    app: db
+spec:
+  ports:
+    - port: 65432
+  selector:
+    app: posgresql
+    tier: posqgresql
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posqgresql-db3
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: db
+      tier: posqgresql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: db
+        tier: posqgresql
+    spec:
+      containers:
+      - image: cecilio91/ecotecno:postgresv1
+        name: posgresql
+        env:
+        - name: POSTGRES_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: posqgresql-db3
+              key: password
+        ports:
+        - containerPort: 5432
+          name: posqgresql-db32
+        volumeMounts:
+        - name: postgres-persistent-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-persistent-storage
+        persistentVolumeClaim:
+          claimName: posgres-vol

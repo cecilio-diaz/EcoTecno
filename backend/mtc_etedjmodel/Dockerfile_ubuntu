@@ -1,0 +1,50 @@
+FROM ubuntu:18.04
+
+# Update ubuntu image and install python tools
+RUN apt-get update && apt-get install -y libldap2-dev
+RUN apt-get install -y python3
+RUN apt-get install -y python3-pip
+
+# READ CIFS SHARE FOLDER
+#RUN apt-get install -y cifs-utils
+
+# COPIANDO ARCHIVOS.
+RUN mkdir -p /django_app
+WORKDIR /django_app
+COPY . .
+
+RUN pip3 install -r requirements.txt
+
+## MIGRACIONES
+RUN python3 manage.py  makemigrations --noinput; exit 0
+RUN python3 manage.py  migrate        --noinput; exit 0
+
+## CONFIUGURANDO USARIO Y CONTRASENA POR DEFECTO (ADMIN)
+
+## CARGAR DATOS DE BACKUP
+
+RUN python3 manage.py loaddata backups/backups_config/user.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/estado_paros_enca.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/estado_paros_deta.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/estado_paros_deta2.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/estado_paros_deta3.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/opcionesGeneralesbackup_maquinas.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/DatosEmpresa.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/DatosProceso.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/RegistroParo.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/programa.yaml; exit 0
+RUN python3 manage.py loaddata backups/backups_config/historial.yaml; exit 0
+
+# CONFIGURAR DATOS DE CONEXION A LA DB
+ARG IP
+ARG PUERTO
+ARG USER
+ARG PASSWORD
+ARG DB
+#RUN python config.py "${IP}"  "${PUERTO}"   "${USER}"  "${PASSWORD}"   "${DB}"
+
+## EJECUTANO DJANGO.
+
+CMD ${EJECUTAR}
+
+#

@@ -84,3 +84,27 @@ Access to dashboard to Kubernetes dashboards [http://localhost:8001/api/v1/names
 # delete all pods
 kubectl delete pods --all
 ```
+
+## Create databasing steps: [https://severalnines.com/database-blog/using-kubernetes-deploy-postgresql]
+
+```
+kubectl create -f postgres-configmap.yaml
+kubectl create -f postgres-storage.yaml
+kubectl create -f postgres-deployment.yaml
+kubectl create -f postgres-service.yaml
+```
+
+## Connect to PostgreSQL  
+```
+kubectl get svc postgres
+```
+
+## Delete PostgreSQL Deployments
+
+```
+# kubectl delete service postgres
+# kubectl delete deployment postgres
+# kubectl delete configmap postgres-config
+# kubectl delete persistentvolumeclaim postgres-pv-claim
+# kubectl delete persistentvolume postgres-pv-volume
+```

@@ -1,0 +1,19 @@
+INSERT_MT_DATA_POSTGRES [ opcion_de_control  ]
+--- |get_url_data [ obj_machine ]
+--- |mt_connect_service [ obj_redis_config ]
+------ |variables_current_mt  [ obj_mt_connect ]
+------ |mt_insert_postgre [ indicadores_insert_datos_datos ]
+
+--- insert_smx_mt_disponibilidad_v2 [ buffer_data // variables_de_control // ]
+------ auto_load_tool 
+--------  get_cut_data_limit [  cargas_y_movim_simple ]
+--------  load_tool  (cargas_y_movim_simple['CORTE'])
+------ select_data_variable_de_control [variables_de_control, disponibilidad_disponible]
+--------- insert_buffer_data [ disponibilidad_disponible // data_buffer ]
+--------- buffer_scanner []
+--------- part_number_detection_v2
+
+
+
+
+conteo_no_piezas_por_turno.py//criterio_de_conteo_pieza_tiempo_real// {valores_float}

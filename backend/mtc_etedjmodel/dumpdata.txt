@@ -1,0 +1,37 @@
+python manage.py dumpdata --exclude datos.dato --exclude DatosProceso.historial_datos_proceso  --exclude DatosProceso.historial_datos_proceso -e contenttypes -e auth.Permission -e admin --indent=4  > configuracion_smi_ete_docker.yaml
+
+python manage.py loaddata configuracion_smi_ete_docker.yaml
+
+python manage.py dumpdata datos.dato DatosProceso.historial_datos_proceso DatosProceso.historial_datos_proceso -e contenttypes -e auth.Permission -e admin --indent=4  > data_smi_ete_docker.yaml
+
+python manage.py loaddata data_smi_ete_docker.yaml
+
+
+
+GUARDAR DATOS PARA SUBIRLOS COMO DATOS POR DEFAUTL
+python manage.py dumpdata -e contenttypes --exclude datos --exclude DatosProceso.HistorialOperacion --exclude DatosProceso.RegistrosOperador --exclude DatosProceso.historial_datos_proceso -e auth.Permission -e admin --indent=4 > data_smi_ete_docker.yaml
+
+python manage.py dumpdata -e contenttypes -e auth.Permission -e admin --indent=4 > data_prueba.yaml
+
+# REALIZAR BACKUP
+python manage.py dumpdata auth.user           > backups/user.yaml
+python manage.py dumpdata opcionesGenerales   > backups/opcionesGeneralesbackup_maquinas.yaml
+python manage.py dumpdata DatosEmpresa        > backups/maquinas.yaml
+python manage.py dumpdata DatosProceso        > backups/DatosProceso.yaml
+python manage.py dumpdata estado_paros_enca   > backups/estado_paros_enca.yaml
+python manage.py dumpdata estado_paros_deta   > backups/estado_paros_deta.yaml
+python manage.py dumpdata estado_paros_deta2  > backups/estado_paros_deta2.yaml
+python manage.py dumpdata estado_paros_deta3  > backups/estado_paros_deta3.yaml
+python manage.py dumpdata RegistroParo        > backups/RegistroParo.yaml
+python manage.py dumpdata DatosEmpresa        > backups/DatosEmpresa.yaml
+
+# LEER.
+python manage.py loaddata backups/user.yaml
+python manage.py loaddata backups/maquinas.yaml
+python manage.py loaddata backups/opcionesGeneralesbackup_maquinas.yaml
+python manage.py loaddata backups/DatosProceso.yaml
+python manage.py loaddata backups/estado_paros_enca.yaml
+python manage.py loaddata backups/estado_paros_deta.yaml
+python manage.py loaddata backups/estado_paros_deta2.yaml
+python manage.py loaddata estado_paros_deta3.yaml
+python manage.py loaddata RegistroParo.yaml

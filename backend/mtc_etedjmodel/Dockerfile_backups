@@ -1,0 +1,3 @@
+FROM python:3.6
+RUN mkdir /backups
+COPY //../../backup_posgres_cimat.tar.bz2 /backups

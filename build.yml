@@ -1,0 +1,49 @@
+version: '3.0'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: pgecotecno
+    environment:
+        TZ: "Europe/Rome"
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: ecotecno
+        POSTGRES_DB: ecotecnodb
+    ports:
+    - '65432:5432'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+
+#    image: cecilio91/ecotecno:postgresv1
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    entrypoint: redis-server --appendonly yes
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+
+  django:
+    build:
+       context: backend/mtc_etedjmodel
+       dockerfile: Dockerfile
+    container_name: djangobackup
+    ports:
+      - '38400:8000'
+    image: cecilio91/ecotecno:v1django
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    environment:
+        EJECUTAR: 'python3 manage.py runserver 0.0.0.0:8000'
+
+
+    # EJECUTAR:
+  #  command: python manage.py runserver 0.0.0.0:8000
