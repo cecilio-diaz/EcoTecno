@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: data-injector
+    app.kubernetes.io/component: senddata
+    app.kubernetes.io/version: "1"
+  name: data-injector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: data-injector
+      app.kubernetes.io/version: "1"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: data-injector
+        app.kubernetes.io/component: senddata
+        app.kubernetes.io/version: "1"
+    spec:
+      containers:
+      - image: cecilio91/ecotecno:v1senddata
+        imagePullPolicy: Always
+        name: data-injector
+        command: ["python"]
+        args: ["senddata.py", "$(API_URL)"]
+        env:
+        - name: API_URL
+          value: http://90.147.184.214
