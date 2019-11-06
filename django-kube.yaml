@@ -6,18 +6,19 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: django-migrate
-  name: django-migrate
+    io.kompose.service: django
+  name: django
 spec:
   ports:
   - name: "38400"
     port: 38400
     targetPort: 8000
-  type: LoadBalancer   
+  type: LoadBalancer
   selector:
-    io.kompose.service: django-migrate
+    io.kompose.service: django
 status:
   loadBalancer: {}
+
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -27,8 +28,8 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: django-migrate
-  name: django-migrate
+    io.kompose.service: django
+  name: django
 spec:
   replicas: 1
   strategy: {}
@@ -36,16 +37,17 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: django-migrate
+        io.kompose.service: django
     spec:
       containers:
       - env:
         - name: EJECUTAR
-          value: python3 manage.py migrate
+          value: python3 manage.py runserver 0.0.0.0:8000
         image: cecilio91/ecotecno:v1django
         name: djangobackup
         ports:
         - containerPort: 8000
         resources: {}
       restartPolicy: Always
+      
 status: {}
