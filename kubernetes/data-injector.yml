@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/name: data-injector
-    app.kubernetes.io/component: senddata
+    app.kubernetes.io/component: data-injector
     app.kubernetes.io/version: "1"
   name: data-injector
 spec:
@@ -17,11 +17,11 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: data-injector
-        app.kubernetes.io/component: senddata
+        app.kubernetes.io/component: data-injector
         app.kubernetes.io/version: "1"
     spec:
       containers:
-      - image: cecilio91/ecotecno:v1senddata
+      - image: aletundo/htc19-data-injector:v1
         imagePullPolicy: Always
         name: data-injector
         command: ["python"]
