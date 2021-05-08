@@ -10,7 +10,7 @@ django-url-filter==0.3.13
 celery==4.3.0
 django_celery_beat==1.5.0
 django_celery_results==1.1.2
-eventlet==0.25.1
+eventlet==0.31.0
 redis==3.3.8
 requests==2.22.0
 gunicorn==19.9.0
